@@ -105,8 +105,6 @@ Also writing Python scripts to automate the boring parts of security analysis be
 
 Getting better at log analysis and writing detection rules. Also improving Python scripting for security automation. 
 
-Doing an ISC² certification (CC) right now to get the fundamentals down properly.
-
 ## Background
 
 Did a 2-month cybersecurity internship where I:
