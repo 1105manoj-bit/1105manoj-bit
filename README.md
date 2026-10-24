@@ -1,73 +1,57 @@
 # Hey, I'm Manoj
 
-BCA graduate from Bengaluru. Got into security during an internship where I was supposed to do regular dev work — ended up spending most of my time breaking into test systems instead. Never looked back.
+BCA grad from Bengaluru, trying to get into a SOC analyst role.
 
-## What I'm actually doing right now
+I got into security during my cybersecurity internship, where I ended up spending most of my time breaking into test systems. These days I'm more interested in the other half: what an attack looks like in the logs and on the wire, and how a SOC catches it.
 
-Spending way too much time staring at malware PCAPs trying to figure out how infected machines phone home to attacker servers. It's basically packet-level detective work and I'm genuinely hooked on it.
+I'm looking for SOC Analyst, Security Analyst or Associate Engineer (Security) roles. I'm in Bengaluru and can start right away.
 
-Also building out a home SOC lab with Wazuh — running my own SIEM instance, deploying agents across VMs, and setting up a deliberately vulnerable Windows Active Directory target so I can attack it myself and watch the detections actually fire on the other end. Closing the loop between "breaking things" and "catching it happening" has taught me more than either side alone.
+## What I spend my time on
 
-Also writing Python scripts to automate the repetitive parts of log analysis — because running the same Wireshark filter 50 times manually is nobody's idea of fun.
+Mostly malware PCAPs. I take a capture of an infected machine, find the host, follow it as it phones home to the attacker's server, pull out the IOCs and write the whole thing up with a timeline. It's basically packet-level detective work and I'm properly hooked. I try to be careful about what I actually saw in the traffic versus what I'm guessing, and I say which is which in the write-up. I've also stopped trusting automated scores blindly, after finding a C2 domain rated 0/89 that had 10+ malicious files talking to it.
+
+The other big thing is my home SOC lab. I run a Wazuh instance on Kali, deploy agents across a few VMs, and keep a deliberately vulnerable Windows Active Directory machine around to attack. Then I go check whether the detections fired on the other side, and if they didn't, I write my own rules. Doing both sides taught me more than either one alone.
+
+I also write Python to automate the boring parts of log analysis, because running the same Wireshark filter 50 times by hand gets old fast.
+
+## Malware cases I've worked through
+
+Each one has a write-up, an IOC list and an ATT&CK mapping:
+
+- **AsyncRAT**: HTTP-based C2, spotted from an odd amount of traffic to one host
+- **Lumma Stealer**: a dead-drop resolver on Pastebin, and an exfiltration puzzle I had to work through slowly
+- **IcedID**: traced from the raw traffic
+- **Angler EK to CryptoWall**: a full drive-by chain with domain shadowing. The ransomware never showed up as its own file because it was decrypted and run in memory, which took me a while to figure out
+- **Spearphishing to dbx.exe**: the one where I had the actual email, so I could catch the spoofed sender and failed SPF check right from the headers
+- **macOS AMOS-style infostealer**: payload download, C2 check-in, a roughly 3 MB archive of stolen data going out, all from a 19-minute capture
+
+I also did an independent investigation of the 2026 Novo Nordisk breach using only public reporting. I rebuilt the timeline and mapped it to ATT&CK myself.
+
+## Stuff I've built
+
+- **SIEM Log Analyzer**: Python and Flask. Reads system and server logs and flags SSH brute force, SQL injection, privilege escalation and data exfiltration, maps them to ATT&CK and shows severity on a dashboard
+- **PhishGuard**: checks SPF, DKIM and DMARC and scans URLs and attachments. I built it after watching people click very obviously fake emails
+- **HybridPentest**: runs Nmap, SQLmap, Metasploit, Hydra, Gobuster and Nikto one after another and writes up a CVSS-scored report
+- **AnalystAI**: you ask a question in plain English and get a chart back. Made for a hackathon, and I'm proud that it admits when it's unsure instead of making things up
+- **Cryptography Toolkit**: a terminal app with SHA-256, AES-256 and RSA-2048, because I wanted to understand encryption and not treat it like a black box
 
 ## Tools I use
 
-**Security:**
-- Wireshark — my most used and most stared-at tool
-- Wazuh — self-hosted SIEM/XDR, home lab
-- Nmap for network recon
-- Burp Suite for web app testing
-- Metasploit for exploitation in lab environments
+- **Security:** Wireshark (the one I stare at most), Wazuh, Splunk, Nmap, Burp Suite, Metasploit
+- **Code:** Python, Bash.
+- **Where I practise:** Kali Linux, a vulnerable Windows Server and AD lab, Ubuntu .
 
-**Development:**
-- Python — mainly for security automation and building tools
-- Bash for quick scripts
-- JavaScript/React when I need a proper interface
+## What I'm learning right now
 
-**Where I practice:**
-- Kali Linux as my main workspace, running the Wazuh manager
-- A dedicated Windows Server VM (Metasploitable 3 / vulnerable AD) as an attack target
-- Ubuntu on WSL2 for dev work
-- TryHackMe when I want structured challenges
-
-## Projects I've built
-
-**[Malware Traffic Analysis]**
-Working through real malware PCAPs from public datasets, one full case at a time — finding infected hosts, tracing C2 infrastructure, and extracting IOCs. Four cases in so far, each a different infection style:
-- **AsyncRAT** — HTTP-based C2, spotted through abnormal packet volume to a single host
-- **Lumma Stealer** — dead-drop resolver pattern via Pastebin, plus a real Tx/Rx exfiltration puzzle I had to work through carefully
-- **Angler EK → CryptoWall** — a full drive-by chain, including tracing domain shadowing and figuring out why the actual ransomware payload never showed up as its own file (decrypted and run entirely in memory)
-- **Spearphishing → dbx.exe downloader** — the one case where I had the actual phishing email, not just traffic; caught a spoofed sender and failed SPF check directly from the headers
-
-Every case gets a full write-up and IOC list, mapped to MITRE ATT&CK. Started this because I wanted proof I can actually analyze threats — not just talk about tools I've heard of.
-
-**[Independent Breach Case Study — Novo Nordisk]**
-Self-directed OSINT investigation into a real 2026 data breach, built entirely from public reporting with no inside access. Reconstructed the full attack timeline and mapped it to MITRE ATT&CK myself — including a genuine mistake on my first pass (misclassified a stage as Reconnaissance instead of Credential Access) that I caught and corrected, and left in the write-up on purpose.
-
-**[SIEM Log Analyzer]**
-Python tool that monitors logs for attack patterns like SSH brute force, SQL injection attempts, and privilege escalation. Maps findings to MITRE ATT&CK because that's the language security teams actually speak.
-
-**[PhishGuard]**
-Email security analyzer that detects phishing and spoofing using SPF/DKIM/DMARC validation. Built it after watching people click obviously fake emails one too many times.
-
-**[AnalystAI]**
-Data visualization tool where you ask questions in plain English and get charts back. Built for a hackathon. Proud of this one because it actually handles uncertainty instead of confidently making things up.
-
-**[Cryptography Toolkit]**
-Terminal app with SHA-256, AES-256, RSA-2048 implementations. Built it because I wanted to actually understand encryption — not just use it like a black box.
-
-## What I'm working on learning
-
-Getting deeper into log analysis and writing detection rules that actually catch real attack patterns — right now that means writing custom Wazuh rules based on what I actually see when I attack my own lab, not just reading about detection theory. Also improving Python for security automation.
+Writing better Wazuh detection rules based on what I see when I attack my own lab, getting deeper into log analysis, and getting better at Python for security automation. And more PCAPs, always more PCAPs.
 
 ## Background
 
-2-month cybersecurity internship where I:
-- Ran a full pentest and documented 27 vulnerabilities across OWASP Top 10
-- Exploited real vulnerabilities on DVWA and Metasploitable
-- Learned how attacks actually work — not just the theory version
+I did a 2-month Cybersecurity and Ethical Hacking internship at ApexPlanet (with AICTE) in early 2026. I ran a pentest, documented 27 vulnerabilities and scored them with CVSS, and spent a lot of time on DVWA and Metasploitable.
 
-## Find me
+I finished the Cisco Cybersecurity Defense Analyst career path in July 2026, and my BCA at Bengaluru City University in 2026.
+
+## Get in touch
 
 - LinkedIn: [manoj-n-naik-2ab040391](https://www.linkedin.com/in/manoj-n-naik-2ab040391)
 - Email: 1105manoj.n@gmail.com
