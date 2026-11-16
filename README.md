@@ -1,10 +1,10 @@
 # Hey, I'm Manoj
 
-BCA grad from Bengaluru, trying to get into a SOC analyst role.
+BCA grad from Bengaluru, trying to get into a cybersecurity role.
 
 I got into security during my cybersecurity internship, where I ended up spending most of my time breaking into test systems. These days I'm more interested in the other half: what an attack looks like in the logs and on the wire, and how a SOC catches it.
 
-I'm looking for SOC Analyst, Security Analyst or Associate Engineer (Security) roles. I'm in Bengaluru and can start right away.
+I'm looking for SOC Analyst, Security Analyst or Associate Engineer roles. I'm in Bengaluru and can start right away.
 
 ## What I spend my time on
 
